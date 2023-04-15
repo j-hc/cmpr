@@ -17,10 +17,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup NDK
         run: |
-          wget -nv https://dl.google.com/android/repository/android-ndk-r25b-linux.zip
-          unzip -qo android-ndk-r25b-linux.zip
-          chmod -R 777 ./android-ndk-r25b
-          export NDK_HOME="$(pwd)/android-ndk-r25b"
+          N="android-ndk-r25c"
+          wget -nv https://dl.google.com/android/repository/${N}-linux.zip
+          unzip -qo ${N}-linux.zip
+          chmod -R 777 ./${N}
+          export NDK_HOME="$(pwd)/${N}"
           cargo install cargo-ndk
           mkdir -p output
 

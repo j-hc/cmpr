@@ -1,5 +1,6 @@
 [build]
-target = "x86_64-unknown-linux-gnu"
+target = "aarch64-linux-android"
+rustflags = ["-Ctarget-feature=+neon"]
 
 [unstable]
 build-std = ["std", "panic_abort"]

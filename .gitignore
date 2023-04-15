@@ -1,3 +1,4 @@
 /target
 /test
+test*
 Cargo.lock
