@@ -6,18 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [armv7-linux-androideabi, aarch64-linux-android]
+        target: [armv7-linux-androideabi, aarch64-linux-android, i686-linux-android]
         include:
           - arch: arm64-v8a
             target: aarch64-linux-android
           - arch: armeabi-v7a
             target: armv7-linux-androideabi
+          - arch: x86
+            target: i686-linux-android
 
     steps:
       - uses: actions/checkout@v3
       - name: Setup NDK
         run: |
-          N="android-ndk-r25c"
+          N="android-ndk-r26c"
           wget -nv https://dl.google.com/android/repository/${N}-linux.zip
           unzip -qo ${N}-linux.zip
           chmod -R 777 ./${N}

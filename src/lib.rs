@@ -11,10 +11,7 @@ macro_rules! cprintln {
 
 pub struct RawArgs {
     argc: i32,
-    #[cfg(target_os = "android")]
     argv: *const *const u8,
-    #[cfg(target_os = "linux")]
-    argv: *const *const i8,
 }
 
 impl ExactSizeIterator for RawArgs {
@@ -40,7 +37,7 @@ impl Iterator for RawArgs {
             return None;
         }
         unsafe {
-            let b = core::slice::from_raw_parts(*self.argv as _, libc::strlen(*self.argv));
+            let b = core::slice::from_raw_parts(*self.argv as _, libc::strlen(*self.argv as _));
             let s = core::str::from_utf8_unchecked(b);
             self.argv = self.argv.add(1);
             self.argc -= 1;
