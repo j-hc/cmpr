@@ -1,5 +1,5 @@
 #![no_main]
-#![feature(array_chunks, portable_simd, let_chains)]
+#![feature(array_chunks, portable_simd)]
 
 #[no_mangle]
 pub extern "C" fn main(argc: i32, argv: *const *const u8) -> i32 {
@@ -43,8 +43,12 @@ fn run(p1: &str, p2: &str) -> Result<bool, RunErr> {
     if f1_size != f2_size {
         return Ok(false);
     }
-    let Some(fm1) = Mmap::new(f1.as_raw_fd(), f1_size as _) else { return Err(RunErr::MMap) };
-    let Some(fm2) = Mmap::new(f2.as_raw_fd(), f2_size as _) else { return Err(RunErr::MMap) };
+    let Some(fm1) = Mmap::new(f1.as_raw_fd(), f1_size as _) else {
+        return Err(RunErr::MMap);
+    };
+    let Some(fm2) = Mmap::new(f2.as_raw_fd(), f2_size as _) else {
+        return Err(RunErr::MMap);
+    };
 
     Ok(compare(&fm1, &fm2))
 }

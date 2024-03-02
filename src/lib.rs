@@ -11,10 +11,7 @@ macro_rules! cprintln {
 
 pub struct RawArgs {
     argc: i32,
-    #[cfg(target_os = "android")]
     argv: *const *const u8,
-    #[cfg(target_os = "linux")]
-    argv: *const *const i8,
 }
 
 impl ExactSizeIterator for RawArgs {
