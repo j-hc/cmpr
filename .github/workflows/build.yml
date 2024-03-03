@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [armv7-linux-androideabi, aarch64-linux-android, i686-linux-android]
+        target: [armv7-linux-androideabi, aarch64-linux-android, i686-linux-android, x86_64-linux-android]
         include:
           - arch: arm64-v8a
             target: aarch64-linux-android
@@ -14,6 +14,8 @@ jobs:
             target: armv7-linux-androideabi
           - arch: x86
             target: i686-linux-android
+          - arch: x86_64
+            target: x86_64-linux-android
 
     steps:
       - uses: actions/checkout@v3
